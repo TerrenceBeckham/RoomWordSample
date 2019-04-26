@@ -7,8 +7,14 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import java.util.List;
+
 @Dao
 public interface WordDao {
+
+    //Method to get any word
+    @Query("SELECT * from word_table LIMIT 1")
+    Word[] getAnyWord();
+
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insert(Word word);

@@ -83,7 +83,13 @@ private WordViewModel mWordViewModel;
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.clear_data) {
+
+            Toast.makeText(this, getString(R.string.clearing_the_data),
+                    Toast.LENGTH_SHORT).show();
+
+            //Delete the existing data
+            mWordViewModel.deleteAll();
             return true;
         }
 

@@ -18,6 +18,11 @@ public class WordRepository {
         mAllwords = mWordDao.getAllWords();
     }
 
+    //Method to call deleteAllWords in the aSyncTask
+    public void deleteAll() {
+        new deleteAllWordsAsyncTask(mWordDao).execute();
+    }
+
     //Wrapper that return the cached words as LiveData
     LiveData<List<Word>> getAllWords() {
         return mAllwords;
@@ -42,5 +47,21 @@ public class WordRepository {
             return null;
         }
     }
+
+    private static class deleteAllWordsAsyncTask extends AsyncTask<Void, Void, Void> {
+        private WordDao mAsyncTaskDao;
+
+        deleteAllWordsAsyncTask(WordDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            mAsyncTaskDao.deleteAll();
+            return null;
+        }
+
+    }
+
 
 }
